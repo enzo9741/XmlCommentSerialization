@@ -1,0 +1,10 @@
+Z:\Dev\GIT\XmlCommentSerialization\Xml\XmlSrc\bin\Debug\XmlSrc.exe.config
+Z:\Dev\GIT\XmlCommentSerialization\Xml\XmlSrc\bin\Debug\XmlSrc.exe
+Z:\Dev\GIT\XmlCommentSerialization\Xml\XmlSrc\bin\Debug\XmlSrc.pdb
+Z:\Dev\GIT\XmlCommentSerialization\Xml\XmlSrc\obj\Debug\XmlSrc.csprojAssemblyReference.cache
+Z:\Dev\GIT\XmlCommentSerialization\Xml\XmlSrc\obj\Debug\XmlSrc.csproj.CoreCompileInputs.cache
+Z:\Dev\GIT\XmlCommentSerialization\Xml\XmlSrc\obj\Debug\XmlSrc.exe
+Z:\Dev\GIT\XmlCommentSerialization\Xml\XmlSrc\obj\Debug\XmlSrc.pdb
+Z:\Dev\GIT\XmlCommentSerialization\Xml\XmlSrc\bin\Debug\XmlCommentSerialization.dll
+Z:\Dev\GIT\XmlCommentSerialization\Xml\XmlSrc\bin\Debug\XmlCommentSerialization.pdb
+Z:\Dev\GIT\XmlCommentSerialization\Xml\XmlSrc\obj\Debug\XmlSrc.csproj.CopyComplete

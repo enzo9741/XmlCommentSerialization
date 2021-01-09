@@ -3,12 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlCommentSerialization", "XmlCommentSerialization\XmlCommentSerialization.csproj", "{D15A3683-24E4-45B3-89E5-A5E731A98B79}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlSrc", "..\Xml\XmlSrc\XmlSrc.csproj", "{483B5AAC-C9C6-4637-BAA0-C1841EF7AA2F}"
-	ProjectSection(ProjectDependencies) = postProject
-		{D15A3683-24E4-45B3-89E5-A5E731A98B79} = {D15A3683-24E4-45B3-89E5-A5E731A98B79}
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlSrc", "XmlSrc\XmlSrc.csproj", "{483B5AAC-C9C6-4637-BAA0-C1841EF7AA2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D15A3683-24E4-45B3-89E5-A5E731A98B79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D15A3683-24E4-45B3-89E5-A5E731A98B79}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D15A3683-24E4-45B3-89E5-A5E731A98B79}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D15A3683-24E4-45B3-89E5-A5E731A98B79}.Release|Any CPU.Build.0 = Release|Any CPU
 		{483B5AAC-C9C6-4637-BAA0-C1841EF7AA2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{483B5AAC-C9C6-4637-BAA0-C1841EF7AA2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{483B5AAC-C9C6-4637-BAA0-C1841EF7AA2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -29,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6E936D7C-9AC3-40CB-B55C-1C067F087254}
+		SolutionGuid = {7F15EE54-82F8-4AB2-9B0F-32123782C0E8}
 	EndGlobalSection
 EndGlobal
