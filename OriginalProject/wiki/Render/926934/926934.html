@@ -1,0 +1,37 @@
+<div class="wikidoc"><h1>XmlAnnotate Class</h1>
+Default implementation that allows comments to be included after attribute output but before element output during serialization on any classes that inherit it.<br /><br />C#<div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">public</span> <span style="color:Blue;">abstract</span> <span style="color:Blue;">class</span> XmlAnnotate
+</pre></div><br />VB<div style="color:Black;background-color:White;"><pre>
+<span style="color:Green;">&#39;Declaration</span>
+<span style="color:Blue;">Public</span> <span style="color:Blue;">MustInherit</span> <span style="color:Blue;">Class</span> XmlAnnotate
+</pre></div><br /><b>Properties</b><br /><br /><table><tr><th> Name </th><th> Description </th><th> Type </th><th> Default </th></tr>
+<tr><td> <i></i>Comment </td><td> Serializable instance of XmlCommentElement bound to the serialized class that inherits XmlAnnotate </td><td> String </td><td> See remarks </td></tr></table><br /><b>Remarks</b><br /><br />The default value of this property is an instance of XmlCommentElement based on the type that inherits this class with behavior as specified in the four static configuration fields.<br /><br />The default implementation would output an element called &#39;Comment&#39; as specified in the XmlCommentElement.ElementName constant in the XML. This can be observed by serializing without using XmlCommentWriter. When XmlCommentWriter is used for serialization, this element is suppressed in the XML output because the namespace matches that which is specified in the XmlCommentElement.Namespace constant.<br /><br />The instance of XmlCommentElement is not instantiated until the value is requested from the property. This ensures minimal memory footprint when using serialization classes for uses other than to output XML.<br /><br />The property setter is required as properties must be writable in order for XmlSerializer to output as XML.<br /><br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">public</span> <span style="color:Blue;">abstract</span> <span style="color:Blue;">class</span> XmlAnnotate
+{
+
+    <span style="color:Blue;">private</span> XmlCommentElement _Comment;
+
+    <span style="color:Gray;">///</span> <span style="color:Gray;">&lt;summary&gt;</span>
+    <span style="color:Gray;">///</span><span style="color:Green;"> Internal property required to output comments with XmlSerializer</span>
+    <span style="color:Gray;">///</span> <span style="color:Gray;">&lt;/summary&gt;</span>
+    [XmlElement(ElementName = XmlCommentElement.ElementName,
+        Namespace = XmlCommentElement.Namespace)]
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    <span style="color:Blue;">public</span> XmlCommentElement __Comment
+    {
+        <span style="color:Blue;">get</span>
+        {
+            <span style="color:Blue;">if</span> (_Comment == <span style="color:Blue;">null</span>)
+                _Comment = <span style="color:Blue;">new</span> XmlCommentElement(<span style="color:Blue;">this</span>.GetType(),
+                    XmlCommentElement.MaxLength, XmlCommentElement.Metadata,
+                    XmlCommentElement.Repeat, XmlCommentElement.Alphabetize);
+            <span style="color:Blue;">return</span> _Comment;
+        }
+        <span style="color:Blue;">set</span>
+        {
+            <span style="color:Blue;">return</span>; <span style="color:Green;">// Setter is requirement for XmlSerializer</span>
+        }
+    }
+
+}
+</pre></div></div><div class="ClearBoth"></div>

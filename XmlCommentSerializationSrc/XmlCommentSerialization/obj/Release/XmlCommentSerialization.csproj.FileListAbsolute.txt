@@ -1,0 +1,8 @@
+D:\Windows\Téléchargements\xmlcomment\sourceCode\XmlCommentSerialization\bin\Release\XmlCommentSerialization.dll
+D:\Windows\Téléchargements\xmlcomment\sourceCode\XmlCommentSerialization\bin\Release\XmlCommentSerialization.pdb
+D:\Windows\Téléchargements\xmlcomment\sourceCode\XmlCommentSerialization\obj\Release\XmlCommentSerialization.csprojAssemblyReference.cache
+D:\Windows\Téléchargements\xmlcomment\sourceCode\XmlCommentSerialization\obj\Release\XmlCommentSerialization.Resource.resources
+D:\Windows\Téléchargements\xmlcomment\sourceCode\XmlCommentSerialization\obj\Release\XmlCommentSerialization.csproj.GenerateResource.cache
+D:\Windows\Téléchargements\xmlcomment\sourceCode\XmlCommentSerialization\obj\Release\XmlCommentSerialization.csproj.CoreCompileInputs.cache
+D:\Windows\Téléchargements\xmlcomment\sourceCode\XmlCommentSerialization\obj\Release\XmlCommentSerialization.dll
+D:\Windows\Téléchargements\xmlcomment\sourceCode\XmlCommentSerialization\obj\Release\XmlCommentSerialization.pdb

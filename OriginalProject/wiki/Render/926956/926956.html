@@ -1,0 +1,18 @@
+<div class="wikidoc"><h1>XmlCommentAttribute Class</h1>
+This class inherits <a href="http://msdn.microsoft.com/en-us/library/system.attribute(v=vs.110).aspx">Attribute</a>. Specifies the comment for the attribute or element, an expected range, the default value, or if commenting should be suppressed.<br /><br />C#<div style="color:Black;background-color:White;"><pre>
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
+<span style="color:Blue;">public</span> <span style="color:Blue;">sealed</span> <span style="color:Blue;">class</span> XmlCommentAttribute : System.Attribute
+</pre></div><br />VB<div style="color:Black;background-color:White;"><pre>
+<span style="color:Green;">&#39;Declaration</span>
+&lt;AttributeUsage(AttributeTargets.<span style="color:Blue;">Property</span> <span style="color:Blue;">Or</span> AttributeTargets.Field)&gt;
+<span style="color:Blue;">Public</span> <span style="color:Blue;">NotInheritable</span> <span style="color:Blue;">Class</span> XmlCommentAttribute
+        <span style="color:Blue;">Implements</span> System.Attribute
+</pre></div><br /><b>Constructors</b><br /><br /><table><tr><th> Name </th><th> Description </th></tr>
+<tr><td> XmlCommentAttribute() </td><td> Initializes a new instance of the XmlCommentAttribute class. </td></tr>
+<tr><td> XmlCommentAttribute(String) </td><td> Initializes a new instance of the XmlCommentAttribute class and specifies the comment to include in the XML output. </td></tr></table><br /><b>Properties</b><br /><br /><table><tr><th> Name </th><th> Description </th><th> Type </th><th> Default </th></tr>
+<tr><td> Comment </td><td> Text that will become the XML comment. This text replaces the Type metadata comment unless TypeData is true </td><td> String </td><td> null </td></tr>
+<tr><td> Default </td><td> What will be the default value in the property or field when deserializing XML that has the attribute or element omitted </td><td> Object </td><td> null </td></tr>
+<tr><td> Ignore </td><td> Don&#39;t output XML comment for this attribute or element </td><td> Boolean </td><td> false </td></tr>
+<tr><td> Max </td><td> The maximum value or length expected in the attribute or element </td><td> Object </td><td> null </td></tr>
+<tr><td> Min </td><td> The minimum value or length expected in the attribute or element </td><td> Object </td><td> null </td></tr>
+<tr><td> TypeData </td><td> Type metadata should be included in the XML comment even when a Text Comment or a Description attribute is specified </td><td> Boolean </td><td> false </td></tr></table><br />For details regarding inherited properties and methods see the <a href="http://msdn.microsoft.com/en-us/library/system.attribute(v=vs.110).aspx">Attribute</a> documentation.<br /><br /><b>Remarks</b><br /><br />Explain the usage scenarios.</div><div class="ClearBoth"></div>

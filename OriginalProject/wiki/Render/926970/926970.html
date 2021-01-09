@@ -1,0 +1,141 @@
+<div class="wikidoc"><h1>XmlCommentWriter Class</h1>
+This class inherits its capabilities from XmlWriter and provides an identical implementation. This class passes all operations to the XmlWriter but suppresses what would be a redundant Comment element from the resultant XML. Pass the instance of this class to the Serialize method. This class has properties that determine the general behavior of comment output.<br /><br />C#<div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">public</span> <span style="color:Blue;">sealed</span> <span style="color:Blue;">class</span> XmlCommentWriter : System.Xml.XmlWriter, System.IDisposable
+</pre></div><br />VB<div style="color:Black;background-color:White;"><pre>
+<span style="color:Green;">&#39;Declaration</span>
+<span style="color:Blue;">Public</span> <span style="color:Blue;">NotInheritable</span> <span style="color:Blue;">Class</span> XmlCommentWriter
+	<span style="color:Blue;">Inherits</span> System.Xml.XmlWriter
+        <span style="color:Blue;">Implements</span> System.IDisposable
+</pre></div><br />For details regarding constructors and methods see the <a href="http://msdn.microsoft.com/en-us/library/system.xml.xmlwriter(v=vs.110).aspx">XmlWriter</a> documentation.<br /><br /><b>Remarks</b><br /><br />Be sure to specify alternate global behaviors before serialization. If your solution is unable to use XmlCommentWriter, you can also specify these settings when constructing an instance of XmlCommentElement.<br /><br />C#<div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">public</span> <span style="color:Blue;">enum</span> Feature
+{
+    Leather,
+    [XmlEnum(<span style="color:#A31515;">&quot;BlueRay&quot;</span>)]
+    DVD,
+    SatNav,
+    ClimateControl
+}
+
+<span style="color:Blue;">public</span> <span style="color:Blue;">class</span> Vehicle : XmlAnnotate
+{
+    [XmlComment(<span style="color:#A31515;">&quot;Alphanumeric text name of the vehicle to order from the supplier&quot;</span>)]
+    <span style="color:Blue;">public</span> <span style="color:Blue;">string</span> Name;
+    [XmlComment(Min = 1, Max = 5, Default = 1)]
+    <span style="color:Blue;">public</span> <span style="color:Blue;">short</span> Quantity;
+    [DefaultValue(<span style="color:Blue;">false</span>)]
+    <span style="color:Blue;">public</span> <span style="color:Blue;">bool</span> CreditChecked;
+    [XmlArrayItem(<span style="color:#A31515;">&quot;Option&quot;</span>, <span style="color:Blue;">typeof</span>(Extra))]
+    <span style="color:Blue;">public</span> List&lt;<span style="color:Blue;">object</span>&gt; Options = <span style="color:Blue;">new</span> List&lt;<span style="color:Blue;">object</span>&gt;();
+}
+
+<span style="color:Blue;">public</span> <span style="color:Blue;">class</span> Extra : XmlAnnotate
+{
+    <span style="color:Blue;">public</span> Feature Type;
+    [XmlComment(Min = 0, Max = 150)]
+    <span style="color:Blue;">public</span> <span style="color:Blue;">string</span> Comment;
+}
+
+<span style="color:Blue;">public</span> <span style="color:Blue;">void</span> CreateOrder(Order order, FileInfo file)
+{
+    <span style="color:Blue;">var</span> settings = <span style="color:Blue;">new</span> XmlWriterSettings();
+    settings.Indent = <span style="color:Blue;">true</span>;
+    <span style="color:Blue;">using</span> (<span style="color:Blue;">var</span> writer = <span style="color:Blue;">new</span> XmlCommentWriter(file.FullName, settings))
+    {
+        writer.Alphabetize = <span style="color:Blue;">true</span>;
+        writer.Metadata = <span style="color:Blue;">true</span>;
+        writer.MaxLength = 50;
+        writer.Repeat = <span style="color:Blue;">true</span>;
+        <span style="color:Blue;">var</span> serialiser = <span style="color:Blue;">new</span> XmlSerializer(order.GetType());
+        serialiser.Serialize(writer, order);
+    }
+}
+</pre></div><br />VB<div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">Public</span> <span style="color:Blue;">Enum</span> Feature
+    Leather
+    &lt;XmlEnum(<span style="color:#A31515;">&quot;BlueRay&quot;</span>)&gt;
+    DVD
+    SatNav
+    ClimateControl
+<span style="color:Blue;">End</span> <span style="color:Blue;">Enum</span>
+
+<span style="color:Blue;">Public</span> <span style="color:Blue;">Class</span> Vehicle
+    <span style="color:Blue;">Inherits</span> XmlAnnotate
+    &lt;XmlComment(<span style="color:#A31515;">&quot;Alphanumeric text name of the vehicle to order from the supplier&quot;</span>)&gt;
+    <span style="color:Blue;">Public</span> <span style="color:Blue;">Property</span> Name <span style="color:Blue;">As</span> <span style="color:Blue;">String</span>
+    &lt;XmlComment(<span style="color:Blue;">Min</span>:=1, <span style="color:Blue;">Max</span>:=5, <span style="color:Blue;">Default</span>:=1)&gt;
+    <span style="color:Blue;">Public</span> <span style="color:Blue;">Property</span> Quantity <span style="color:Blue;">As</span> <span style="color:Blue;">Short</span>
+    <span style="color:Blue;">Public</span> <span style="color:Blue;">Property</span> CreditChecked <span style="color:Blue;">As</span> <span style="color:Blue;">Boolean</span>
+    &lt;XmlArrayItem(<span style="color:#A31515;">&quot;Option&quot;</span>, <span style="color:Blue;">GetType</span>(Extra))&gt;
+    <span style="color:Blue;">Public</span> <span style="color:Blue;">Property</span> Options <span style="color:Blue;">As</span> <span style="color:Blue;">New</span> List(Of Extra)
+<span style="color:Blue;">End</span> <span style="color:Blue;">Class</span>
+
+<span style="color:Blue;">Public</span> <span style="color:Blue;">Class</span> Extra
+    <span style="color:Blue;">Inherits</span> XmlAnnotate
+    <span style="color:Blue;">Public</span> <span style="color:Blue;">Property</span> Type <span style="color:Blue;">As</span> Feature
+    &lt;XmlComment(<span style="color:Blue;">Min</span>:=0, <span style="color:Blue;">Max</span>:=150)&gt;
+    <span style="color:Blue;">Public</span> <span style="color:Blue;">Property</span> Comment <span style="color:Blue;">As</span> <span style="color:Blue;">String</span>
+<span style="color:Blue;">End</span> <span style="color:Blue;">Class</span>
+
+<span style="color:Blue;">Public</span> <span style="color:Blue;">Sub</span> CreateOrder(<span style="color:Blue;">ByRef</span> <span style="color:Blue;">Order</span> <span style="color:Blue;">As</span> <span style="color:Blue;">Order</span>, <span style="color:Blue;">ByRef</span> File <span style="color:Blue;">As</span> FileInfo)
+    <span style="color:Blue;">Dim</span> Settings <span style="color:Blue;">As</span> <span style="color:Blue;">New</span> XmlWriterSettings()
+    Settings.Indent = <span style="color:Blue;">True</span>
+    <span style="color:Blue;">Using</span> Writer <span style="color:Blue;">As</span> <span style="color:Blue;">New</span> XmlCommentWriter(File.FullName, Settings)
+        Writer.Alphabetize = <span style="color:Blue;">True</span>
+        Writer.Metadata = <span style="color:Blue;">True</span>
+        Writer.MaxLength = 50
+        Writer.Repeat = <span style="color:Blue;">True</span>
+        <span style="color:Blue;">Dim</span> Serializer <span style="color:Blue;">As</span> <span style="color:Blue;">New</span> XmlSerializer(<span style="color:Blue;">Order</span>.<span style="color:Blue;">GetType</span>())
+        Serializer.Serialize(Writer, <span style="color:Blue;">Order</span>)
+    <span style="color:Blue;">End</span> <span style="color:Blue;">Using</span>
+<span style="color:Blue;">End</span> <span style="color:Blue;">Sub</span>
+</pre></div><br />XML<div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">&lt;</span><span style="color:#A31515;">Vehicle</span><span style="color:Blue;">&gt;</span>
+  <span style="color:Green;">&lt;!-- CreditChecked: Either true or false. Defaults to false --&gt;</span>
+  <span style="color:Green;">&lt;!-- Name: Alphanumeric text name of the vehicle to order from ... --&gt;</span>
+  <span style="color:Green;">&lt;!-- ... the supplier --&gt;</span>
+  <span style="color:Green;">&lt;!-- Options: Zero or more elements of type Option --&gt;</span>
+  <span style="color:Green;">&lt;!-- Quantity: Whole number between 1 and 5. Defaults to 1 --&gt;</span>
+  <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Name</span><span style="color:Blue;">&gt;</span>Murci&#233;lago<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Name</span><span style="color:Blue;">&gt;</span>
+  <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Quantity</span><span style="color:Blue;">&gt;</span>1<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Quantity</span><span style="color:Blue;">&gt;</span>
+  <span style="color:Blue;">&lt;</span><span style="color:#A31515;">CreditChecked</span><span style="color:Blue;">&gt;</span>true<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">CreditChecked</span><span style="color:Blue;">&gt;</span>
+  <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Options</span><span style="color:Blue;">&gt;</span>
+    <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Option</span><span style="color:Blue;">&gt;</span>
+      <span style="color:Green;">&lt;!-- Comment: Alphanumeric text between 0 and 150 characters --&gt;</span>
+      <span style="color:Green;">&lt;!-- Type: One of Leather, BlueRay, SatNav, ClimateControl --&gt;</span>
+      <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Type</span><span style="color:Blue;">&gt;</span>ClimateControl<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Type</span><span style="color:Blue;">&gt;</span>
+    <span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Option</span><span style="color:Blue;">&gt;</span>
+    <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Option</span><span style="color:Blue;">&gt;</span>
+      <span style="color:Green;">&lt;!-- Comment: Alphanumeric text between 0 and 150 characters --&gt;</span>
+      <span style="color:Green;">&lt;!-- Type: One of Leather, BlueRay, SatNav, ClimateControl --&gt;</span>
+      <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Type</span><span style="color:Blue;">&gt;</span>Leather<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Type</span><span style="color:Blue;">&gt;</span>
+      <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Comment</span><span style="color:Blue;">&gt;</span>Black<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Comment</span><span style="color:Blue;">&gt;</span>
+    <span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Option</span><span style="color:Blue;">&gt;</span>
+  <span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Options</span><span style="color:Blue;">&gt;</span>
+<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Vehicle</span><span style="color:Blue;">&gt;</span>
+</pre></div><br />If classes that implement XmlAnnotate, or properties or fields are specified of type XmlCommentElement; when serializing without using the XmlCommentWriter, a redundant element will output to the resultant XML but does not cause any error when deserialized. In addition, the default settings apply unless they have been specified in the constructor of XmlCommentElement. For example:<br /><br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">&lt;</span><span style="color:#A31515;">Vehicle</span><span style="color:Blue;">&gt;</span>
+  <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Comment</span> <span style="color:Red;">xmlns</span><span style="color:Blue;">=</span><span style="color:Black;">&quot;</span><span style="color:Blue;">http://www.30e6b941-728b-4a0d-b215-56fe5c470ff9.org/</span><span style="color:Black;">&quot;</span><span style="color:Blue;">&gt;</span>
+    <span style="color:Green;">&lt;!-- Name: Alphanumeric text name of the vehicle to order from the supplier --&gt;</span>
+    <span style="color:Green;">&lt;!-- Quantity: Whole number between 1 and 5. Defaults to 1 --&gt;</span>
+    <span style="color:Green;">&lt;!-- CreditChecked: Either true or false. Defaults to false --&gt;</span>
+    <span style="color:Green;">&lt;!-- Options: Zero or more elements of type Option --&gt;</span>
+  <span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Comment</span><span style="color:Blue;">&gt;</span>
+  <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Name</span><span style="color:Blue;">&gt;</span>Murci&#233;lago<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Name</span><span style="color:Blue;">&gt;</span>
+  <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Quantity</span><span style="color:Blue;">&gt;</span>1<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Quantity</span><span style="color:Blue;">&gt;</span>
+  <span style="color:Blue;">&lt;</span><span style="color:#A31515;">CreditChecked</span><span style="color:Blue;">&gt;</span>true<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">CreditChecked</span><span style="color:Blue;">&gt;</span>
+  <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Options</span><span style="color:Blue;">&gt;</span>
+    <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Option</span><span style="color:Blue;">&gt;</span>
+      <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Comment</span> <span style="color:Red;">xmlns</span><span style="color:Blue;">=</span><span style="color:Black;">&quot;</span><span style="color:Blue;">http://www.30e6b941-728b-4a0d-b215-56fe5c470ff9.org/</span><span style="color:Black;">&quot;</span><span style="color:Blue;">&gt;</span>
+        <span style="color:Green;">&lt;!-- Type: One of Leather, BlueRay, SatNav, ClimateControl --&gt;</span>
+        <span style="color:Green;">&lt;!-- Comment: Alphanumeric text between 0 and 150 characters --&gt;</span>
+      <span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Comment</span><span style="color:Blue;">&gt;</span>
+      <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Type</span><span style="color:Blue;">&gt;</span>ClimateControl<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Type</span><span style="color:Blue;">&gt;</span>
+    <span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Option</span><span style="color:Blue;">&gt;</span>
+    <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Option</span><span style="color:Blue;">&gt;</span>
+      <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Comment</span> <span style="color:Red;">xmlns</span><span style="color:Blue;">=</span><span style="color:Black;">&quot;</span><span style="color:Blue;">http://www.30e6b941-728b-4a0d-b215-56fe5c470ff9.org/</span><span style="color:Black;">&quot;</span> <span style="color:Blue;">/&gt;</span>
+      <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Type</span><span style="color:Blue;">&gt;</span>Leather<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Type</span><span style="color:Blue;">&gt;</span>
+      <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Comment</span><span style="color:Blue;">&gt;</span>Black<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Comment</span><span style="color:Blue;">&gt;</span>
+    <span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Option</span><span style="color:Blue;">&gt;</span>
+  <span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Options</span><span style="color:Blue;">&gt;</span>
+<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Vehicle</span><span style="color:Blue;">&gt;</span>
+</pre></div><br />XmlCommentWriter has to implement and hide the Dispose() method implemented on XmlWriter as the garbage collector does not check for the IDisposable interface on inherited classes. This implementation delegates to the Dispose() on the XmlWriter instance.</div><div class="ClearBoth"></div>

@@ -1,0 +1,21 @@
+<div class="wikidoc"><b>2. Use XmlCommentWriter instead of XmlWriter when serializing</b><br /><br />The XmlCommentWriter class inherits its capabilities from <a href="http://msdn.microsoft.com/en-us/library/system.xml.xmlwriter(v=vs.110).aspx">XmlWriter</a> and provides an identical implementation. This class passes all operations to the XmlWriter but suppresses what would be a redundant Comment element from the resultant XML. Pass an instance of this class to the Serialize method. For example:  <br /><br />C#<div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">public</span> <span style="color:Blue;">void</span> CreateOrder(Order order, FileInfo file)
+{
+    <span style="color:Blue;">var</span> settings = <span style="color:Blue;">new</span> XmlWriterSettings();
+    settings.Indent = <span style="color:Blue;">true</span>;
+    <span style="color:Blue;">using</span> (<span style="color:Blue;">var</span> writer = <span style="color:Blue;">new</span> XmlCommentWriter(file.FullName, settings))
+    {
+        <span style="color:Blue;">var</span> serialiser = <span style="color:Blue;">new</span> XmlSerializer(order.GetType());
+        serialiser.Serialize(writer, order);
+    }
+}
+</pre></div><br />VB<div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">Public</span> <span style="color:Blue;">Sub</span> CreateOrder(<span style="color:Blue;">ByRef</span> <span style="color:Blue;">Order</span> <span style="color:Blue;">As</span> <span style="color:Blue;">Order</span>, <span style="color:Blue;">ByRef</span> File <span style="color:Blue;">As</span> FileInfo)
+    <span style="color:Blue;">Dim</span> Settings <span style="color:Blue;">As</span> <span style="color:Blue;">New</span> XmlWriterSettings()
+    Settings.Indent = <span style="color:Blue;">True</span>
+    <span style="color:Blue;">Using</span> Writer <span style="color:Blue;">As</span> <span style="color:Blue;">New</span> XmlCommentWriter(File.FullName, Settings)
+        <span style="color:Blue;">Dim</span> Serializer <span style="color:Blue;">As</span> <span style="color:Blue;">New</span> XmlSerializer(<span style="color:Blue;">Order</span>.<span style="color:Blue;">GetType</span>())
+        Serializer.Serialize(Writer, <span style="color:Blue;">Order</span>)
+    <span style="color:Blue;">End</span> <span style="color:Blue;">Using</span>
+<span style="color:Blue;">End</span> <span style="color:Blue;">Sub</span>
+</pre></div><br /><div style="text-align:right;float:right;"><a href="https://xmlcomment.codeplex.com/wikipage?title=Getting%20Started%20Step%203%20of%203&referringTitle=Getting%20Started%20Step%202%20of%203">Next Step &#62;</a></div><div style="clear:both;height:0;">&nbsp;</div><br /></div><div class="ClearBoth"></div>

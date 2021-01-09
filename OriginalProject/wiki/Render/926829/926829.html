@@ -1,0 +1,50 @@
+<div class="wikidoc"><b>1. Inherit from XmlAnnotate</b><br /><br />The XmlAnnotate class provides a default implementation to allow comments to appear embedded within the XML element of the class that is serialized. Inherit XmlAnnotate on each class that is being serialized where comments are required. For example:<br /><br />C#<div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">using</span> System.Collections.Generic;
+<span style="color:Blue;">using</span> XmlCommentSerialization;
+
+<span style="color:Blue;">public</span> <span style="color:Blue;">enum</span> Feature
+{
+    Leather,
+    DVD,
+    SatNav,
+    ClimateControl
+}
+
+<span style="color:Blue;">public</span> <span style="color:Blue;">class</span> Vehicle : XmlAnnotate
+{
+    <span style="color:Blue;">public</span> <span style="color:Blue;">string</span> Name;
+    <span style="color:Blue;">public</span> <span style="color:Blue;">short</span> Quantity;
+    <span style="color:Blue;">public</span> <span style="color:Blue;">bool</span> CreditChecked;
+    <span style="color:Blue;">public</span> List&lt;Extra&gt; Options = <span style="color:Blue;">new</span> List&lt;Extra&gt;();
+}
+
+<span style="color:Blue;">public</span> <span style="color:Blue;">class</span> Extra : XmlAnnotate
+{
+    <span style="color:Blue;">public</span> Feature Type;
+    <span style="color:Blue;">public</span> <span style="color:Blue;">string</span> Comment;
+}
+</pre></div><br />VB<div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">Imports</span> System.Collections.Generic
+<span style="color:Blue;">Imports</span> XmlCommentSerialization
+
+<span style="color:Blue;">Public</span> <span style="color:Blue;">Enum</span> Feature
+    Leather
+    DVD
+    SatNav
+    ClimateControl
+<span style="color:Blue;">End</span> <span style="color:Blue;">Enum</span>
+
+<span style="color:Blue;">Public</span> <span style="color:Blue;">Class</span> Vehicle
+    <span style="color:Blue;">Inherits</span> XmlAnnotate
+    <span style="color:Blue;">Public</span> <span style="color:Blue;">Property</span> Name <span style="color:Blue;">As</span> <span style="color:Blue;">String</span>
+    <span style="color:Blue;">Public</span> <span style="color:Blue;">Property</span> Quantity <span style="color:Blue;">As</span> <span style="color:Blue;">Short</span>
+    <span style="color:Blue;">Public</span> <span style="color:Blue;">Property</span> CreditChecked <span style="color:Blue;">As</span> <span style="color:Blue;">Boolean</span>
+    <span style="color:Blue;">Public</span> <span style="color:Blue;">Property</span> Options <span style="color:Blue;">As</span> <span style="color:Blue;">New</span> List(Of Extra)
+<span style="color:Blue;">End</span> <span style="color:Blue;">Class</span>
+
+<span style="color:Blue;">Public</span> <span style="color:Blue;">Class</span> Extra
+    <span style="color:Blue;">Inherits</span> XmlAnnotate
+    <span style="color:Blue;">Public</span> <span style="color:Blue;">Property</span> Type <span style="color:Blue;">As</span> Feature
+    <span style="color:Blue;">Public</span> <span style="color:Blue;">Property</span> Comment <span style="color:Blue;">As</span> <span style="color:Blue;">String</span>
+<span style="color:Blue;">End</span> <span style="color:Blue;">Class</span>
+</pre></div><br /><div style="text-align:right;float:right;"><a href="https://xmlcomment.codeplex.com/wikipage?title=Getting%20Started%20Step%202%20of%203&referringTitle=Getting%20Started%20Step%201%20of%203">Next Step &#62;</a></div><div style="clear:both;height:0;">&nbsp;</div><br /></div><div class="ClearBoth"></div>

@@ -1,0 +1,54 @@
+<div class="wikidoc"><b>Project Description</b><br />Helps developers include comments and other self-documenting information in XML files produced using the Microsoft XML Serialization classes.<br /><br /><b>Introduction</b><br />When serializing and deserializing a class as XML using <a href="http://msdn.microsoft.com/en-us/library/system.xml.serialization.xmlserializer(v=vs.110).aspx">XmlSerializer</a> its possible to decorate it with <a href="http://msdn.microsoft.com/en-us/library/83y7df3e(v=vs.110).aspx">attributes</a> that control the structure such as the XML attribute or element name. What is lacking is an attribute that embeds comments when serializing to help describe these attributes and elements to aid in the readability and editing of the XML by those removed from the system source code. For example:<br /><br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">&lt;</span><span style="color:#A31515;">Vehicle</span><span style="color:Blue;">&gt;</span>
+    <span style="color:Green;">&lt;!-- Name: Alphanumeric text name of the vehicle to order from the supplier --&gt;</span>
+    <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Name</span><span style="color:Blue;">&gt;</span>Murci&#233;lago<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Name</span><span style="color:Blue;">&gt;</span>
+<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Vehicle</span><span style="color:Blue;">&gt;</span>
+</pre></div><br />This project provides an XmlComment attribute to embed such comments:<br /><br />C#<div style="color:Black;background-color:White;"><pre>
+[XmlComment(<span style="color:#A31515;">&quot;Alphanumeric text name of the vehicle to order from the supplier&quot;</span>)]
+<span style="color:Blue;">public</span> <span style="color:Blue;">string</span> Name;
+</pre></div><br />VB<div style="color:Black;background-color:White;"><pre>
+&lt;XmlComment(<span style="color:#A31515;">&quot;Alphanumeric text name of the vehicle to order from the supplier&quot;</span>)&gt;
+<span style="color:Blue;">Public</span> <span style="color:Blue;">Property</span> Name <span style="color:Blue;">As</span> <span style="color:Blue;">String</span>
+</pre></div><br />This project also embeds comments from Type metadata:<br /><br /><div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">&lt;</span><span style="color:#A31515;">Vehicle</span><span style="color:Blue;">&gt;</span>
+  <span style="color:Green;">&lt;!-- Name: Alphanumeric text name of the vehicle to order from the supplier --&gt;</span>
+  <span style="color:Green;">&lt;!-- Delivery: One of Standard, Rush, VIP --&gt;</span>
+  <span style="color:Green;">&lt;!-- CreditChecked: Either true or false --&gt;</span>
+  <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Name</span><span style="color:Blue;">&gt;</span>Murci&#233;lago<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Name</span><span style="color:Blue;">&gt;</span>
+  <span style="color:Blue;">&lt;</span><span style="color:#A31515;">Delivery</span><span style="color:Blue;">&gt;</span>Rush<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Delivery</span><span style="color:Blue;">&gt;</span>
+  <span style="color:Blue;">&lt;</span><span style="color:#A31515;">CreditChecked</span><span style="color:Blue;">&gt;</span>true<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">CreditChecked</span><span style="color:Blue;">&gt;</span>
+<span style="color:Blue;">&lt;/</span><span style="color:#A31515;">Vehicle</span><span style="color:Blue;">&gt;</span>
+</pre></div><br />This project is not an XML Serialization solution. This project relies upon having an instance of the XmlSerializer class. It is an addition for when there is a requirement to document XML. There are some requirements that must be satisfied in order for this project to work with your code.<br /><br />C#<div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">using</span> XmlCommentSerialization;
+
+<span style="color:Blue;">public</span> <span style="color:Blue;">enum</span> Delivery
+{
+    Standard,
+    Rush,
+    VIP
+}
+
+<span style="color:Blue;">public</span> <span style="color:Blue;">class</span> Vehicle : XmlAnnotate
+{
+    [XmlComment(<span style="color:#A31515;">&quot;Alphanumeric text name of the vehicle to order from the supplier&quot;</span>)]
+    <span style="color:Blue;">public</span> <span style="color:Blue;">string</span> Name;
+    <span style="color:Blue;">public</span> Delivery Delivery;
+    <span style="color:Blue;">public</span> <span style="color:Blue;">bool</span> CreditChecked;
+}
+</pre></div><br />VB<div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">Imports</span> XmlCommentSerialization
+
+<span style="color:Blue;">Public</span> <span style="color:Blue;">Enum</span> Delivery
+    Standard
+    Rush
+    VIP
+<span style="color:Blue;">End</span> <span style="color:Blue;">Enum</span>
+
+<span style="color:Blue;">Public</span> <span style="color:Blue;">Class</span> Vehicle
+    <span style="color:Blue;">Inherits</span> XmlAnnotate
+    &lt;XmlComment(<span style="color:#A31515;">&quot;Alphanumeric text name of the vehicle to order from the supplier&quot;</span>)&gt;
+    <span style="color:Blue;">Public</span> <span style="color:Blue;">Property</span> Name <span style="color:Blue;">As</span> <span style="color:Blue;">String</span>
+    <span style="color:Blue;">Public</span> <span style="color:Blue;">Property</span> Delivery <span style="color:Blue;">As</span> Delivery
+    <span style="color:Blue;">Public</span> <span style="color:Blue;">Property</span> CreditChecked <span style="color:Blue;">As</span> <span style="color:Blue;">Boolean</span>
+<span style="color:Blue;">End</span> <span style="color:Blue;">Class</span>
+</pre></div><br /><div style="text-align:right;float:right;"><a href="https://xmlcomment.codeplex.com/documentation?referringTitle=Home">Get Started</a></div><div style="clear:both;height:0;">&nbsp;</div><br /></div><div class="ClearBoth"></div>

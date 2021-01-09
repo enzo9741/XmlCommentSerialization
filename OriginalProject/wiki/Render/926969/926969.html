@@ -1,0 +1,19 @@
+<div class="wikidoc"><h1>XmlCommentElement Class</h1>
+This class implements <a href="http://msdn.microsoft.com/en-us/library/system.xml.serialization.ixmlserializable(v=vs.110).aspx">IXmlSerializable</a> and is instantiated in XmlAnnotate. Properties or fields of this type can be implemented in serialized classes when inheriting XmlAnnotate is not possible or undesired. In the constructor its possible to alter the default settings that would otherwise be specified globally with static properties.<br /><br />C#<div style="color:Black;background-color:White;"><pre>
+<span style="color:Blue;">public</span> <span style="color:Blue;">sealed</span> <span style="color:Blue;">class</span> XmlCommentElement : System.Xml.Serialization.IXmlSerializable
+</pre></div><br />VB<div style="color:Black;background-color:White;"><pre>
+<span style="color:Green;">&#39;Declaration</span>
+<span style="color:Blue;">Public</span> <span style="color:Blue;">NotInheritable</span> <span style="color:Blue;">Class</span> XmlCommentElement
+        <span style="color:Blue;">Implements</span> System.Xml.Serialization.IXmlSerializable
+</pre></div><br /><b>Constructors</b><br /><br /><table><tr><th> Name </th><th> Description </th></tr>
+<tr><td> XmlCommentElement() </td><td> Required for Serialization. Not to be used in code. </td></tr>
+<tr><td> XmlCommentElement(Type, Int32, Boolean, Boolean, Boolean) </td><td> Annotates the Type specified during serialization using the settings specified. </td></tr></table><br /><b>Constants</b><br /><br /><table><tr><th> Name </th><th> Description </th><th> Type </th><th> Default </th></tr>
+<tr><td> ElementName </td><td> Element name used to enable comments in XML output </td><td> String </td><td> Comment </td></tr>
+<tr><td> Namespace </td><td> Unique namespace that XmlCommentWriter relies upon to detect when to suppress the redundant Comment element. </td><td> String </td><td> http://www.30e6b941-728b-4a0d-b215-56fe5c470ff9.org/ </td></tr></table><br /><b>Static Properties</b><br /><br /><table><tr><th> Name </th><th> Description </th><th> Type </th><th> Default </th></tr>
+<tr><td> Alphabetize </td><td> Order attribute and element comments alphabetically </td><td> Boolean </td><td> false </td></tr>
+<tr><td> Metadata </td><td> Output comments from Type metadata </td><td> Boolean </td><td> true </td></tr>
+<tr><td> MaxLength </td><td> Maximum comment length before wrapping. Zero means no wrap </td><td> Int32 </td><td> 0 </td></tr>
+<tr><td> Repeat </td><td> Output comments each time the Type appears in the XML </td><td> Boolean </td><td> false </td></tr></table><br /><br /><b>Methods</b><br /><br /><table><tr><th> Name </th><th> Description </th></tr>
+<tr><td> GetSchema() </td><td> No schema defined at this time. Returns null. </td></tr>
+<tr><td> ReadXml(XmlReader) </td><td> No in-memory representation of comments supported at this time. Returns null. </td></tr>
+<tr><td> WriteXml(XmlWriter) </td><td> Outputs comments for the fields and properties on the Type that become elements and attributes in accordance with the settings specified. </td></tr></table><br /><br />specified in the constructor and other settings specified on XmlCommentWriter or the constructor. |<br /><b>Remarks</b><br /><br />If serialization occurs against an instance of this class that has been constructed using the default zero parameter constructor, a NotSupportedException will occur. It is necessary to identify the Type to used for annotation prior to serialization.<br /><br /></div><div class="ClearBoth"></div>
